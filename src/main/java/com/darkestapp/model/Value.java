@@ -11,4 +11,12 @@ public class Value {
     private String key;
     private String value;
     private String type = Type.STRING.getCode();
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

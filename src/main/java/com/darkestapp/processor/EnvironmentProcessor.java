@@ -20,6 +20,7 @@ import static com.darkestapp.model.enums.Version.V532;
  */
 public class EnvironmentProcessor {
 
+    private static final String DEFAULT_NEEDLE = "%needle%";
     private static final String DEFAULT_SCOPE = "environment";
     private static final Version DEFAULT_VERSION = V532;
 
@@ -39,14 +40,30 @@ public class EnvironmentProcessor {
             String name,
             SimpleValue[] values) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SimpleValue[] processed = processValues(values, name);
         return new Environment(
                 UUID.randomUUID().toString(),
                 name,
-                values,
+                processed,
                 timestamp.getTime(),
                 DEFAULT_SCOPE,
                 new Date(timestamp.getTime()),
                 DEFAULT_VERSION
                 );
+    }
+
+    private SimpleValue[] processValues(SimpleValue[] values, String name) {
+        String valueString;
+        String value;
+        SimpleValue[] valuesToReturn = new SimpleValue[values.length];
+        int index = 0;
+        for (SimpleValue element : values) {
+            value = element.getValue();
+            valueString = value.replaceAll(DEFAULT_NEEDLE, name);
+            element.setValue(valueString);
+            valuesToReturn[index] = element;
+            index++;
+        }
+        return valuesToReturn;
     }
 }
