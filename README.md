@@ -1,7 +1,7 @@
 # Postman environment generator
 The main object on this artifact is help to create complex postman environment collections, specially when it is required to create multiple environment files with the same structure.
 
-##How to use?
+## How to use?
 To work with this library you can provide a json String to __EnvironmentFileProcessor__, together with the path where you need to store the postman environment collection. For example:
 ```java
     String path = "environments";
@@ -61,7 +61,7 @@ If the json string used as input to generate the postman environment collection 
     List<String> generatedFiles = generator.generate(inputFile, outputPath);
 ```
 
-##How to include in any project?
+## How to include in any project?
 
 For Maven:
 
