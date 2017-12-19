@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.darkestapp.config.Constant.DEFAULT_NEEDLE;
+import static com.darkestapp.config.Constant.SPECIAL_NEEDLE;
 import static org.junit.Assert.*;
 
 /**
@@ -16,16 +18,16 @@ public class EnvironmentProcessorTest {
     private static final String JSON_STRING = "{\n" +
             "  \"names\": [\n" +
             "    \"name0\",\n" +
-            "    \"name1\"\n" +
+            "    \"/prev/name1\"\n" +
             "  ],\n" +
             "  \"values\": [\n" +
             "    {\n" +
             "      \"key\": \"key0\",\n" +
-            "      \"value\": \"value0\"\n" +
+            "      \"value\": \""+DEFAULT_NEEDLE+"\"\n" +
             "    },\n" +
             "    {\n" +
             "      \"key\": \"key1\",\n" +
-            "      \"value\": \"value1\"\n" +
+            "      \"value\": \""+SPECIAL_NEEDLE+"\"\n" +
             "    }\n" +
             "  ]\n" +
             "}";

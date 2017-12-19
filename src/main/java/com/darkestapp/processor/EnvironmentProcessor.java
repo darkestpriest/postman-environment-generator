@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static com.darkestapp.config.Constant.DEFAULT_NEEDLE;
+import static com.darkestapp.config.Constant.*;
 import static com.darkestapp.model.enums.Version.V532;
 
 /**
@@ -53,17 +53,37 @@ public class EnvironmentProcessor {
     }
 
     private SimpleValue[] processValues(SimpleValue[] values, String name) {
+        SimpleValue[] simpleValues = processValues(values, name, DEFAULT_NEEDLE);
+        String processedName = processName(name);
+        return processValues(
+                simpleValues,
+                processedName,
+                SPECIAL_NEEDLE);
+    }
+
+    private SimpleValue[] processValues(SimpleValue[] values, String name, String needle) {
         String valueString;
         String value;
         SimpleValue[] valuesToReturn = new SimpleValue[values.length];
         int index = 0;
+        SimpleValue processed;
         for (SimpleValue element : values) {
             value = element.getValue();
-            valueString = value.replaceAll(DEFAULT_NEEDLE, name);
-            element.setValue(valueString);
-            valuesToReturn[index] = element;
+            valueString = value.replaceAll(needle, name);
+            processed = new SimpleValue();
+            processed.setKey(element.getKey());
+            processed.setValue(valueString);
+            valuesToReturn[index] = processed;
             index++;
         }
         return valuesToReturn;
+    }
+
+    private String processName(String name) {
+        String processedName = name;
+        for (String charToReplace : SPECIAL_CHARS_TO_REMOVE) {
+            processedName = name.replaceAll(charToReplace, CHAR_TO_INCLUDE);
+        }
+        return processedName;
     }
 }
