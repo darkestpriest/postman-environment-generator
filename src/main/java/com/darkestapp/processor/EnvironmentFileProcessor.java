@@ -36,7 +36,8 @@ public class EnvironmentFileProcessor {
     private String createFile(String path, Environment environment)
             throws PostmanEnvironmentGeneratorException {
         String environmentJson = environmentToJson(environment);
-        checkPath(path);
+        String realPath = getRealPath(path, environment);
+        checkPath(realPath);
         String filePath = path + SEPARATOR + environment.getName() + FILE_NAME_SUFFIX;
         try(FileWriter file = new FileWriter(filePath)) {
             file.write(environmentJson);
@@ -48,6 +49,22 @@ public class EnvironmentFileProcessor {
                     e,
                     EnvironmentFileProcessor.class.getSimpleName(),
                     "Cannot parse " + environment);
+        }
+    }
+
+    private String getRealPath(String path, Environment environment) {
+        String environmentName = environment.getName();
+        if(environmentName.contains(SEPARATOR)) {
+            StringBuilder builder = new StringBuilder(path);
+            String[] detachedName = environmentName.split(SEPARATOR);
+            for(int index = 0; index < detachedName.length-1; index++) {
+                builder
+                        .append(SEPARATOR)
+                        .append(detachedName[index]);
+            }
+            return builder.toString();
+        } else {
+            return path;
         }
     }
 

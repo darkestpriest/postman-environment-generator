@@ -17,7 +17,7 @@ public class EnvironmentFileProcessorTest {
     private static final String JSON_STRING = "{\n" +
             "  \"names\": [\n" +
             "    \"name0\",\n" +
-            "    \"name1\"\n" +
+            "    \"name1/name2\"\n" +
             "  ],\n" +
             "  \"values\": [\n" +
             "    {\n" +
