@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static com.darkestapp.config.Constant.DEFAULT_NEEDLE;
 import static com.darkestapp.model.enums.Version.V532;
 
 /**
@@ -20,7 +21,6 @@ import static com.darkestapp.model.enums.Version.V532;
  */
 public class EnvironmentProcessor {
 
-    private static final String DEFAULT_NEEDLE = "%needle%";
     private static final String DEFAULT_SCOPE = "environment";
     private static final Version DEFAULT_VERSION = V532;
 
